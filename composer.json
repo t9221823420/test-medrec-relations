@@ -1,0 +1,13 @@
+{
+  "name": "yozh/virtualhealth-test",
+  "description": "virtualhealth test",
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "app/"
+    },
+    "classmap": [
+    ]
+  }
+}
