@@ -1,25 +1,32 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bw
- * Date: 16.03.2019
- * Time: 12:42
- */
 
 namespace core;
 
+/**
+ * Class Request
+ * @package core
+ */
 class Request
 {
+    /** @var  */
 	protected $_url;
+	/** @var  */
 	protected $_queryParams;
+	/** @var  */
 	protected $_baseUrl;
+	/** @var  */
 	protected $_hostName;
-	
+	/** @var  */
 	protected $_scriptFile;
+	/** @var  */
 	protected $_scriptUrl;
-	
+	/** @var  */
 	protected $_pathInfo;
-	
+
+    /**
+     * @return mixed|string|string[]|null
+     * @throws \Exception
+     */
 	public function getUrl()
 	{
 		if( $this->_url === null ) {
@@ -28,7 +35,10 @@ class Request
 		
 		return $this->_url;
 	}
-	
+
+    /**
+     * @return mixed
+     */
 	public function getHostName()
 	{
 		if( $this->_hostName === null ) {
@@ -37,7 +47,11 @@ class Request
 		
 		return $this->_hostName;
 	}
-	
+
+    /**
+     * @return mixed|string
+     * @throws \Exception
+     */
 	public function getScriptUrl()
 	{
 		if( $this->_scriptUrl === null ) {
@@ -65,7 +79,11 @@ class Request
 		
 		return $this->_scriptUrl;
 	}
-	
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
 	public function getScriptFile()
 	{
 		if( isset( $this->_scriptFile ) ) {
@@ -78,20 +96,21 @@ class Request
 		
 		throw new \Exception( 'Unable to determine the entry script file path.' );
 	}
-	
+
+    /**
+     * @param $value
+     */
 	public function setScriptUrl( $value )
 	{
 		$this->_scriptUrl = $value === null ? null : '/' . trim( $value, '/' );
 	}
-	
+
+    /**
+     * @return mixed|string|string[]|null
+     * @throws \Exception
+     */
 	protected function _resolveRequestUri()
 	{
-		/*
-		if( $this->headers->has( 'X-Rewrite-Url' ) ) { // IIS
-			$requestUri = $this->headers->get( 'X-Rewrite-Url' );
-		}
-		else if( isset( $_SERVER['REQUEST_URI'] ) ) {
-		*/
 		if( isset( $_SERVER['REQUEST_URI'] ) ) {
 			$requestUri = $_SERVER['REQUEST_URI'];
 			if( $requestUri !== '' && $requestUri[0] !== '/' ) {
@@ -110,7 +129,11 @@ class Request
 		
 		return $requestUri;
 	}
-	
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
 	protected function _resolvePathInfo()
 	{
 		$pathInfo = $this->getUrl();
@@ -159,7 +182,11 @@ class Request
 		
 		return (string)$pathInfo;
 	}
-	
+
+    /**
+     * @param $s
+     * @return bool|string
+     */
 	public static function utf8Encode( $s )
 	{
 		$s   .= $s;
@@ -182,7 +209,10 @@ class Request
 		
 		return substr( $s, 0, $j );
 	}
-	
+
+    /**
+     * @return array
+     */
 	public function resolve()
 	{
 		$result = $this->parseRequest();
@@ -201,7 +231,11 @@ class Request
 		
 		throw new NotFoundHttpException( Yii::t( 'yii', 'Page not found.' ) );
 	}
-	
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
 	public function getPathInfo()
 	{
 		if( $this->_pathInfo === null ) {
@@ -210,14 +244,21 @@ class Request
 		
 		return $this->_pathInfo;
 	}
-	
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
 	public function parseRequest()
 	{
 		$pathInfo = $this->getPathInfo();
 		
 		return [ $pathInfo, [] ];
 	}
-	
+
+    /**
+     * @return mixed
+     */
 	public function getQueryParams()
 	{
 		if( $this->_queryParams === null ) {
@@ -226,7 +267,11 @@ class Request
 		
 		return $this->_queryParams;
 	}
-	
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
 	public function getBaseUrl()
 	{
 		if( $this->_baseUrl === null ) {
