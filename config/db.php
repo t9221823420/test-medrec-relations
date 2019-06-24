@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'dsn' => 'mysql:host=localhost;dbname=sandbox_doctrine',
-    'dbname' => 'sandbox_doctrine',
+    'dsn' => 'mysql:host=localhost;dbname=tests_virtualhealth',
+    'dbname' => 'tests_virtualhealth',
     'user' => 'work',
     'password' => 'work',
     'host' => 'localhost',
